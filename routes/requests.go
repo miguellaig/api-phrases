@@ -12,12 +12,11 @@ import (
 
 func Requests(e *echo.Echo, userhandler *handlers.UserHandler, phrasehandler *handlers.PhraseHandler) error {
 
-	e.GET("/swagger/*", echoSwagger.WrapHandler)
 
 	e.POST("/register", userhandler.RegisterUser)
 	e.POST("/login", userhandler.LoginUserHandler)
 
-	r := e.Group("/login")
+	r := e.Group("/phrase")
 	r.Use(middleware.ValidationMiddleware)
 	r.POST("", phrasehandler.RegisterPhraseHandler)
 	r.GET("", phrasehandler.ListPhrasesHandler)
