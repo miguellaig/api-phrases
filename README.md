@@ -1,35 +1,78 @@
-# API Alemão - Projeto Finalizado
+# API de Frases
 
-Este projeto é uma API simples para gerenciar frases, com autenticação básica via JWT.
-
-## Como rodar
-
-1. Tenha o Go instalado (versão 1.18+ recomendada)  
-2. Configure seu banco de dados PostgreSQL (ou outro suportado pelo GORM)  
-3. Ajuste as variáveis de ambiente (ex: conexão com banco, chave JWT)  
-4. Rode o comando para iniciar a API:
-
-   go run main.go
-
-## Rotas principais
-
-| Método | Rota               | Descrição                                                |
-|--------|--------------------|---------------------------------------------------------|
-| POST   | /phrases           | Criar uma nova frase                                     |
-| GET    | /phrases           | Listar frases do usuário (opcional filtro por linguagem e texto) |
-| PUT    | /phrases/:id       | Atualizar uma frase existente                            |
-| DELETE | /phrases/:id       | Deletar uma frase existente                              |
-| POST   | /login             | Autenticar usuário e gerar token                         |
-
-## Requisitos
-
-- Banco de dados configurado e acessível  
-- Usuário autenticado via token JWT para rotas protegidas
-
-## Melhorias futuras
-
-As melhorias planejadas para evoluir este projeto estão anotadas no arquivo `MELHORIAS_FUTURAS.md`.
+API RESTful desenvolvida em **Go**, utilizando **Echo**, **GORM**, **JWT** e **SQLite**.  
+Permite cadastro de usuários, login com autenticação JWT e gerenciamento de frases pessoais.
 
 ---
 
-Qualquer dúvida ou sugestão, só avisar!
+## Tecnologias Usadas
+
+- Go
+- Echo
+- GORM
+- JWT
+- SQLite
+
+---
+
+## Rodando Localmente
+
+1. Clone o repositório:
+
+```bash
+git clone https://github.com/miguellaig/api-phrases.git
+```
+
+2. Entre na pasta do projeto:
+
+```bash
+cd api-phrases
+```
+
+3. Instale dependências:
+
+```bash
+go mod tidy
+```
+
+4. Rode a API:
+
+```bash
+go run main.go
+```
+
+> Observação: testes foram realizados pelo Postman.
+
+---
+
+## Endpoints
+
+### Usuários
+
+- `POST /register` – Cadastra um usuário
+- `POST /login` – Autentica usuário e retorna token JWT
+
+### Frases (autenticadas)
+
+- `POST /phrase` – Cria uma nova frase
+- `GET /phrase` – Lista as frases de um usuário
+- `PUT /phrase/:id` – Atualiza uma frase existente
+- `DELETE /phrase/:id` – Deleta uma frase
+
+> Observação: todas as rotas de frase requerem token JWT.
+
+---
+
+## Detalhes do Projeto
+
+- Autenticação com JWT (chave secreta definida diretamente no código).
+- Estrutura modular com separação de **handlers**, **services** e **models**.
+- Código organizado para facilitar futuras melhorias, como testes automatizados e documentação Swagger.
+
+---
+
+## Próximos Passos
+
+- Adicionar testes automatizados
+- Implementar Swagger/OpenAPI para documentação
+- Remover chave secreta do código e colocar em variável de ambiente
